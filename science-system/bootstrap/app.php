@@ -13,8 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Trust the Codespaces / Docker proxy headers
         $middleware->trustProxies(at: '*');
-
-    })->withExceptions(function (Exceptions $exceptions): void {
-        // използва App\Exceptions\Handler
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        //
     })
     ->create();
