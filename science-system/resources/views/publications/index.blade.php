@@ -12,25 +12,25 @@
             <div class="bg-white shadow rounded-lg p-6">
                 <h3 class="text-lg font-semibold mb-4">➕ Нова публикация</h3>
 
-                <form method="POST" action="{{ route('publications.store') }}" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <form method="POST" action="{{ route('publications.store') }}">
                     @csrf
+                    <input type="text" name="title" placeholder="Заглавие" required>
+                    <input type="text" name="authors" placeholder="Автори" required>
 
-                    <input name="title" placeholder="Заглавие"
-                           class="border rounded px-3 py-2 col-span-2" />
-
-                    <input name="authors" placeholder="Автори"
-                           class="border rounded px-3 py-2" />
-
-                    <select name="type" class="border rounded px-3 py-2">
-                        <option value="">Тип</option>
-                        <option value="journal_article">Статия в списание</option>
-                        <option value="conference_paper">Доклад на конференция</option>
-                        <option value="book">Книга</option>
+                    <select name="type" required>
+                        @foreach(\App\Models\Publication::getTypes() as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
                     </select>
 
-                    <button class="md:col-span-4 bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-                        Запази
-                    </button>
+                    <select name="theme">
+                        <option value="">Без тема</option>
+                        @foreach(\App\Models\Publication::getThemes() as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
+
+                    <button type="submit">Добави публикация</button>
                 </form>
             </div>
 
@@ -68,7 +68,7 @@
                                 <td class="p-3 font-medium">{{ $publication->title }}</td>
                                 <td class="p-3">{{ $publication->authors }}</td>
                                 <td class="p-3 text-sm text-gray-600">
-                                    {{ ucfirst(str_replace('_', ' ', $publication->type)) }}
+                                    {{ \App\Models\Publication::TYPES[$publication->type] ?? $publication->type }}
                                 </td>
                                 <td class="p-3 text-right">
                                     <form method="POST" action="{{ route('publications.destroy', $publication) }}">

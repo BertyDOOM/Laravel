@@ -13,15 +13,13 @@ return new class extends Migration
 {
     Schema::create('publications', function (Blueprint $table) {
         $table->id();
-        $table->string('title');               
-        $table->string('authors');              
-        $table->enum('type', [               
-            'journal_article',
-            'conference_paper',
-            'book'
-        ]);
+        $table->string('title');
+        $table->string('authors');
+        $table->enum('type', ['journal_article','conference_paper','book','poster'])->default('journal_article');
+        $table->string('theme')->nullable(); // ако имаш и тема
         $table->timestamps();
     });
+    
 }
     /**
      * Reverse the migrations.
