@@ -30,12 +30,20 @@ class PublicationController extends Controller
         $request->validate([
         'title' => 'required|string|max:255',
         'authors' => 'required|string|max:255',
-        'type' => 'required|in:journal,conference,book,report,poster'
-    ]);;
+        'type' => 'required|in:journal,conference,book,report,poster',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+    ]);
 
-        Publication::create($request->only('title', 'authors', 'type'));
+    $data = $request->only('title', 'authors', 'type', 'theme');
 
-        return back();
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('publications', 'public');
+        $data['image'] = $path;
+    }
+
+    Publication::create($data);
+
+    return back();
     }
 
     public function destroy(Publication $publication)

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Publication extends Model
 {
-    protected $fillable = ['title', 'authors', 'type', 'theme'];
+    protected $fillable = ['title', 'authors', 'type', 'theme', 'image'];
 
         const TYPES = [
         'journal'    => 'Статия в списание',

@@ -14,9 +14,9 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::middleware(['auth'])->group(function () {
-Route::get('/publications', [PublicationController::class, 'index'])->name('publications.index');
-Route::post('/publications', [PublicationController::class, 'store'])->name('publications.store');
-Route::delete('/publications/{publication}', [PublicationController::class, 'destroy'])->name('publications.destroy');
+    Route::get('/publications', [PublicationController::class, 'index'])->name('publications.index');
+    Route::post('/publications', [PublicationController::class, 'store'])->name('publications.store');
+    Route::delete('/publications/{publication}', [PublicationController::class, 'destroy'])->name('publications.destroy');
 });
 
 require __DIR__.'/auth.php';
