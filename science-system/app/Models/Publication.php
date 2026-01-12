@@ -8,7 +8,7 @@ class Publication extends Model
 {
     protected $fillable = ['title', 'authors', 'type', 'theme'];
 
-    const TYPES = [
+        const TYPES = [
         'journal'    => 'Статия в списание',
         'conference' => 'Доклад на конференция',
         'book'       => 'Книга',

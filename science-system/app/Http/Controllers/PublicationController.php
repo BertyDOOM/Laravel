@@ -28,10 +28,10 @@ class PublicationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'authors' => 'required|string|max:255',
-            'type' => 'required'
-        ]);
+        'title' => 'required|string|max:255',
+        'authors' => 'required|string|max:255',
+        'type' => 'required|in:journal,conference,book,report,poster'
+    ]);;
 
         Publication::create($request->only('title', 'authors', 'type'));
 

@@ -1,86 +1,175 @@
 <x-app-layout>
+    {{-- Header слот с жълт фон --}}
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-bookish-red leading-tight">
-            📚 Система за научни публикации
-        </h2>
+        <div class="header-container">
+            <h2 class="header-text">
+                📚 Система за научни публикации
+            </h2>
+        </div>
     </x-slot>
 
-    <div class="py-8 bg-white min-h-screen">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    {{-- Вграден CSS --}}
+    <style>
+        body {
+            background-color: #ffffff; /* основен фон */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header с жълт фон като хартия */
+        .header-container {
+            background-color: #fff8dc; /* светло жълт */
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .header-text {
+            color: #7B3F00; /* bookish brown-red */
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Основни карти */
+        .card {
+            background-color: #ffffff;
+            border: 2px solid #7b3030; /* леко червеникави рамки */
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #7b3030; /* заглавия в картите */
+            margin-bottom: 1rem;
+        }
+
+        .input, select, button {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .input:focus, select:focus {
+            outline: none;
+            border-color: #7b3030;
+            box-shadow: 0 0 0 2px rgba(179, 71, 71, 0.3);
+        }
+
+        .button {
+            background-color: #7b3030; /* леко червеникав бутон */
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+        }
+
+        .button:hover {
+            background-color: #912e2e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            color: #7b3030;
+            font-weight: bold;
+        }
+
+        td .delete-button {
+            color: #7b3030;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        td .delete-button:hover {
+            color: #ff0000;
+        }
+    </style>
+
+    <div class="py-8 min-h-screen">
+        <div class="max-w-5xl mx-auto">
 
             <!-- Add publication -->
-            <div class="bg-white shadow rounded-lg p-6 border border-bookish-red">
-                <h3 class="text-lg font-semibold text-bookish-red mb-4">➕ Нова публикация</h3>
-                <form method="POST" action="{{ route('publications.store') }}" class="space-y-3">
+            <div class="card">
+                <h3>➕ Нова публикация</h3>
+                <form method="POST" action="{{ route('publications.store') }}">
                     @csrf
-                    <input type="text" name="title" placeholder="Заглавие" required
-                           class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-bookish-red">
-                    <input type="text" name="authors" placeholder="Автори" required
-                           class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-bookish-red">
+                    <input type="text" name="title" placeholder="Заглавие" class="input" required>
+                    <input type="text" name="authors" placeholder="Автори" class="input" required>
 
-                    <select name="type" required
-                            class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-bookish-red">
+                    <select name="type" required>
                         @foreach(\App\Models\Publication::getTypes() as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
                     </select>
 
-                    <select name="theme"
-                            class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-bookish-red">
+                    <select name="theme" class="input">
                         <option value="">Без тема</option>
                         @foreach(\App\Models\Publication::getThemes() as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
                     </select>
 
-                    <button type="submit" class="bg-bookish-red text-white px-4 py-2 rounded hover:bg-red-700">
-                        Добави публикация
-                    </button>
+                    <button type="submit" class="button">Добави публикация</button>
                 </form>
             </div>
 
             <!-- Search -->
-            <div class="bg-white shadow rounded-lg p-4 border border-bookish-red">
+            <div class="card">
                 <form method="GET" class="flex gap-4">
-                    <input name="search" placeholder="Търсене по заглавие или автор"
-                           class="flex-grow border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-bookish-red" />
-
-                    <select name="type" class="border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-bookish-red">
+                    <input name="search" placeholder="Търсене по заглавие или автор" class="input">
+                    <select name="type" class="input">
                         <option value="">Всички типове</option>
                         <option value="journal_article">Статия</option>
                         <option value="conference_paper">Доклад</option>
                         <option value="book">Книга</option>
                         <option value="poster">Плакат</option>
                     </select>
-
-                    <button class="bg-bookish-red text-white px-4 py-2 rounded hover:bg-red-700">Търси</button>
+                    <button type="submit" class="button">Търси</button>
                 </form>
             </div>
 
             <!-- Publications list -->
-            <div class="bg-white shadow rounded-lg overflow-hidden border border-bookish-red">
-                <table class="w-full text-left">
-                    <thead class="bg-gray-100">
+            <div class="card">
+                <table>
+                    <thead>
                         <tr>
-                            <th class="p-3 text-bookish-red font-semibold">Заглавие</th>
-                            <th class="p-3 text-bookish-red font-semibold">Автори</th>
-                            <th class="p-3 text-bookish-red font-semibold">Тип</th>
-                            <th class="p-3 text-right text-bookish-red font-semibold">Действия</th>
+                            <th>Заглавие</th>
+                            <th>Автори</th>
+                            <th>Тип</th>
+                            <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($publications as $publication)
-                            <tr class="border-t">
-                                <td class="p-3 font-medium">{{ $publication->title }}</td>
-                                <td class="p-3">{{ $publication->authors }}</td>
-                                <td class="p-3 text-sm text-gray-600">
-                                    {{ \App\Models\Publication::TYPES[$publication->type] ?? $publication->type }}
-                                </td>
-                                <td class="p-3 text-right">
+                            <tr>
+                                <td>{{ $publication->title }}</td>
+                                <td>{{ $publication->authors }}</td>
+                                <td>{{ \App\Models\Publication::TYPES[$publication->type] ?? $publication->type }}</td>
+                                <td class="text-right">
                                     <form method="POST" action="{{ route('publications.destroy', $publication) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="text-bookish-red hover:text-red-700">✖</button>
+                                        <button type="submit" class="delete-button">✖</button>
                                     </form>
                                 </td>
                             </tr>

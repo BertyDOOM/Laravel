@@ -1,0 +1,25 @@
+/* custom.css */
+body {
+    background-color: #fff; /* главният цвят */
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.headerf {
+    background-color: #8b3a2f; /* bookish brown-red */
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.button {
+    background-color: #8b3a2f;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+}
+
+.button:hover {
+    background-color: #6f2e26;
+}

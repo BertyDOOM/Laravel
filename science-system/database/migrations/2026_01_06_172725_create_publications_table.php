@@ -12,18 +12,15 @@ return new class extends Migration
     public function up(): void
 {
     Schema::create('publications', function (Blueprint $table) {
-        $table->id();
-        $table->string('title');
-        $table->string('authors');
-        $table->enum('type', ['journal_article','conference_paper','book','poster'])->default('journal_article');
-        $table->string('theme')->nullable(); // ако имаш и тема
-        $table->timestamps();
-    });
+            $table->id();
+            $table->string('title');
+            $table->string('authors');
+            $table->enum('type', ['journal','conference','book','report','poster'])->default('journal');
+            $table->string('theme')->nullable();
+            $table->timestamps();
+        });
     
 }
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('publications');
