@@ -12,11 +12,21 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+ 
 
+
+// силно импровизирано
 Route::middleware(['auth'])->group(function () {
-    Route::get('/publications', [PublicationController::class, 'index'])->name('publications.index');
-    Route::post('/publications', [PublicationController::class, 'store'])->name('publications.store');
-    Route::delete('/publications/{publication}', [PublicationController::class, 'destroy'])->name('publications.destroy');
+    Route::get('/public/publications', [PublicationController::class, 'index'])->name('publications.index');
+    Route::post('/public/publications', [PublicationController::class, 'store'])->name('publications.store');
+    Route::delete('/public/publications/{publication}', [PublicationController::class, 'destroy'])->name('publications.destroy');
+
+    Route::get('/public/publications/{publication}/edit', [PublicationController::class, 'edit'])
+    ->name('publications.edit');
+
+    Route::put('/public/publications/{publication}', [PublicationController::class, 'update'])
+        ->name('publications.update');
+
 });
 
 require __DIR__.'/auth.php';

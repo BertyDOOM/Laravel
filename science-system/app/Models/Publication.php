@@ -9,20 +9,31 @@ class Publication extends Model
     protected $fillable = ['title', 'authors', 'type', 'theme', 'image'];
 
         const TYPES = [
-        'journal'    => 'Статия в списание',
-        'conference' => 'Доклад на конференция',
+        'journal'    => 'Статия',
+        'conference' => 'Доклад',
         'book'       => 'Книга',
-        'report'     => 'Доклад/Отчет',
-        'poster'     => 'Плакат/Презентация'
+        'report'     => 'Отчет',
+        'poster'     => 'Плакат/Презентация',
+        'encyclopedia' => 'Енциклопедия',
+        'monograph'    => 'Монография',
+        'other' => 'Друго'
     ];
 
     const THEMES = [
-        'ai'       => 'Изкуствен интелект',
+
         'physics'  => 'Физика',
         'biology'  => 'Биология',
         'chemistry'=> 'Химия',
         'math'     => 'Математика',
         'cs'       => 'Компютърни науки',
+        'ai'       => 'Изкуствен интелект',
+        'literature' => 'Литература',
+        'history'    => 'История',
+        'art'        => 'Изкуство',
+        'philosophy' => 'Философия',
+        'sociology'  => 'Социология',
+        'languages'   => 'Езици',
+        'other'    => 'Друго'
     ];
 
     public static function getTypes(): array

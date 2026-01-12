@@ -10,17 +10,21 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('publications', function (Blueprint $table) {
+    {
+        Schema::create('publications', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('authors');
-            $table->enum('type', ['journal','conference','book','report','poster'])->default('journal');
+            $table->string('type')->default('journal'); // string вместо enum
             $table->string('theme')->nullable();
+            $table->string('image')->nullable(); // снимка
             $table->timestamps();
         });
-    
-}
+    }
+
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('publications');

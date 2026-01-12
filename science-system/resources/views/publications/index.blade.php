@@ -78,12 +78,21 @@
                                 <td>{{ $publication->authors }}</td>
                                 <td>{{ \App\Models\Publication::TYPES[$publication->type] ?? $publication->type }}</td>
                                 <td>{{ \App\Models\Publication::THEMES[$publication->theme] ?? '' }}</td>
-                                <td class="text-right">
-                                    <form method="POST" action="{{ route('publications.destroy', $publication) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="delete-button">✖</button>
-                                    </form>
+                                <td>
+                                    <div class="actions">
+                                        <!-- Edit -->
+                                        <a href="{{ route('publications.edit', $publication) }}"
+                                        class="edit-btn">
+                                            ✏️
+                                        </a>
+
+                                        <!-- Delete -->
+                                        <form method="POST" action="{{ route('publications.destroy', $publication) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-button">✖</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -110,4 +119,19 @@
     th { color: #7b3030; font-weight: bold; }
     td .delete-button { color: #7b3030; background: none; border: none; cursor: pointer; }
     td .delete-button:hover { color: #ff0000; }
+    .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.edit-btn {
+    color: #2563eb;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.edit-btn:hover {
+    color: #1e40af;
+}
 </style>
