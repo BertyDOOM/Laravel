@@ -1,5 +1,4 @@
 <x-app-layout>
-    {{-- Header слот с жълт фон --}}
     <x-slot name="header">
         <div class="header-container">
             <h2 class="header-text">
@@ -11,7 +10,6 @@
     <div class="py-8 min-h-screen">
         <div class="max-w-5xl mx-auto">
 
-            <!-- Add publication -->
             <div class="card">
                 <h3>➕ Нова публикация</h3>
                 <form method="POST" action="{{ route('publications.store') }}" enctype="multipart/form-data" class="space-y-3">
@@ -32,7 +30,7 @@
                         @endforeach
                     </select>
 
-                    <!-- Upload image -->
+                    <!-- Upload -->
                     <input type="file" name="image" class="input">
 
                     <button type="submit" class="button">Добави публикация</button>
@@ -106,13 +104,18 @@
 
 <style>
     body { background-color: #ffffff; font-family: Arial, sans-serif; }
-    .header-container { background-color: #fff8dc; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .header-container { background-color: #fff8dc; padding: 1.5rem; border-radius: 8px;
+                        margin-bottom: 2rem; text-align: center; 
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
     .header-text { color: #7B3F00; font-size: 2rem; font-weight: bold; margin: 0; }
-    .card { background-color: #ffffff; border: 2px solid #7b3030; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .card { background-color: #ffffff; border: 2px solid #7b3030; border-radius: 8px; 
+            padding: 1rem; margin-bottom: 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
     .card h3 { color: #7b3030; margin-bottom: 1rem; }
-    .input, select, button { display: block; width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem; }
+    .input, select, button { display: block; width: 100%; padding: 0.5rem; margin-bottom: 1rem;
+                             border-radius: 6px; border: 1px solid #ccc; font-size: 1rem; }
     .input:focus, select:focus { outline: none; border-color: #7b3030; box-shadow: 0 0 0 2px rgba(179, 71, 71, 0.3); }
-    .button { background-color: #7b3030; color: #ffffff; border: none; cursor: pointer; font-weight: bold; padding: 0.5rem 1rem; }
+    .button { background-color: #7b3030; color: #ffffff; border: none; cursor: pointer; 
+              font-weight: bold; padding: 0.5rem 1rem; }
     .button:hover { background-color: #912e2e; }
     table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
     th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #ddd; }
@@ -122,16 +125,9 @@
     .actions {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-}
-
-.edit-btn {
-    color: #2563eb;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.edit-btn:hover {
-    color: #1e40af;
-}
+    gap: 0.5rem;}
+    .edit-btn {
+    color: #2563eb; font-weight: bold; text-decoration: none;}
+    .edit-btn:hover {
+    color: #1e40af;}
 </style>

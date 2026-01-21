@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('authors');
-            $table->string('type')->default('journal'); // string вместо enum
+            $table->string('type')->default('journal');
             $table->string('theme')->nullable();
-            $table->string('image')->nullable(); // снимка
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
